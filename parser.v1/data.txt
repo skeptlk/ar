@@ -1,0 +1,8 @@
+{
+    if (abc >= qwe) then {
+        test123 = 123 + 321;
+        anothervar = (123 * 456 / 435.44);
+    } else {
+        qwert  = abc + fff;
+    }
+}

@@ -42,27 +42,27 @@ Token* Lexer::scan() {
 
     switch (peek)
     {
-    // case ':':
-    //     if (readch('=')) return &Word::_asgn;
-    //     else             return new Token((Tag)':');
-    // case '&':
-    //     if (readch('&')) return (Token*)&(Word::_and);
-    //     else             return new Token((Tag)'&');
-    // case '|':
-    //     if (readch('|')) return (Token*)&(Word::_or);
-    //     else             return new Token((Tag)'|');
-    // case '=':
-    //     if (readch('=')) return (Token*)&(Word::_eq);
-    //     else             return new Token((Tag)'=');
-    // case '!':
-    //     if (readch('=')) return (Token*)&(Word::_ne);
-    //     else             return new Token((Tag)'!');
-    // case '<':
-    //     if (readch('=')) return (Token*)&(Word::_le);
-    //     else             return new Token((Tag)'<');
-    // case '>':
-    //     if (readch('=')) return (Token*)&(Word::_ge);
-    //     else             return new Token((Tag)'>');
+    case ':':
+        if (readch('=')) return &Word::_asgn;
+        else             return new Token((Tag)':');
+    case '&':
+        if (readch('&')) return (Token*)&(Word::_and);
+        else             return new Token((Tag)'&');
+    case '|':
+        if (readch('|')) return (Token*)&(Word::_or);
+        else             return new Token((Tag)'|');
+    case '=':
+        if (readch('=')) return (Token*)&(Word::_eq);
+        else             return new Token((Tag)'=');
+    case '!':
+        if (readch('=')) return (Token*)&(Word::_ne);
+        else             return new Token((Tag)'!');
+    case '<':
+        if (readch('=')) return (Token*)&(Word::_le);
+        else             return new Token((Tag)'<');
+    case '>':
+        if (readch('=')) return (Token*)&(Word::_ge);
+        else             return new Token((Tag)'>');
     }
     
     if (isdigit(peek)) {

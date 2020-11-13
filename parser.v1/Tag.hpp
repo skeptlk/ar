@@ -1,4 +1,5 @@
 #ifndef TAG
+#define TAG
 
 enum class Tag {
     AND   = 256, ASGN  = 257, BASIC = 258, BREAK = 259, DO   = 260, 

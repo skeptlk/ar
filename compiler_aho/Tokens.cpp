@@ -98,7 +98,9 @@ Type Type::_null  = Type("null",  (Tag) 0, 0); // we need this to return null fr
  *          ARRAY
  */
 
-Array::Array(int sz, Type p): Type("[]", Tag::INDEX, sz*p.width) {
+Array::Array(int sz, Type p)
+    :Type("[]", Tag::INDEX, sz*p.width) 
+{
     size = sz;
     of = p;
 }

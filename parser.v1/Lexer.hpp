@@ -3,14 +3,14 @@
 
 #include <iostream>
 #include <fstream>
-#include <map>
+#include "Hashtable.hpp"
 #include "Tokens.hpp"
 
 class Lexer {
 private: 
     char peek = ' ';
     std::ifstream *input;
-    std::map<std::string, Token*> words;
+    Hashtable *words;
     void reserve(Word* w);
     void readch();
     bool readch(char c);
@@ -19,6 +19,7 @@ public:
     bool iseof = false;
     Lexer(std::ifstream *inp);
     Token* scan();
+    void printTable();
 };
 
 #endif

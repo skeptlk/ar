@@ -11,7 +11,8 @@ Token::Token(Tag t) {
 }
 
 std::string Token::toString() {
-    return std::to_string((int) tag);
+    std::string s(1, (char) tag);
+    return s;
 }
 
 
@@ -50,6 +51,10 @@ Word::Word(): Token((Tag)0) {};
 
 Word::Word(std::string s, Tag tag): Token(tag) {
     lexeme = s;
+}
+
+std::string Word::toString() {
+    return lexeme;
 }
 
 Word Word::_and   = Word("&&", Tag::AND); 

@@ -4,8 +4,10 @@ int Lexer::line = 1;
 
 Lexer::Lexer(std::ifstream *inp) {
     input = inp;
+    words = new Hashtable();
     reserve( new Word("if",    Tag::IF)    );
     reserve( new Word("else",  Tag::ELSE)  );
+    reserve( new Word("then",  Tag::THEN)  );
     reserve( new Word("while", Tag::WHILE) );
     reserve( new Word("do",    Tag::DO)    );
     reserve( new Word("break", Tag::BREAK) );
@@ -15,7 +17,7 @@ Lexer::Lexer(std::ifstream *inp) {
 }
 
 void Lexer::reserve (Word *w) { 
-    words.insert({ w->lexeme, w });
+    words->insert(w->lexeme, w);
 }
 
 void Lexer::readch() { 
@@ -41,6 +43,9 @@ Token* Lexer::scan() {
 
     switch (peek)
     {
+    case ':':
+        if (readch('=')) return &Word::_asgn;
+        else             return new Token((Tag)':');
     case '&':
         if (readch('&')) return (Token*)&(Word::_and);
         else             return new Token((Tag)'&');
@@ -67,8 +72,14 @@ Token* Lexer::scan() {
             v = 10*v + (peek - '0');
             readch();
         } while ( isdigit(peek) );
-        if (peek != '.') 
-            return new Num(v);
+        if (peek != '.') {
+            Token *n;
+            if (n = words->find(std::to_string(v)))
+                return n;
+            n = new Num(v);
+            words->insert(std::to_string(v), n);
+            return n;
+        }
         float x = v;
         float d = 10;
         for (;;) {
@@ -77,25 +88,35 @@ Token* Lexer::scan() {
             x = x + (peek - '0') / d; 
             d = d * 10;
         }
-        return new Real(x);
-        if (isalpha(peek)) {
-            std::string s;
-            do {
-                s += peek; readch();
-            } while ( isalnum(peek) );
-            if (words.find(s) != words.end());
-                return (words[s]);
-            Token *w = new Word(s, Tag::ID);
-            words.insert({s, w});
-            return w;
-        }
-        // do i need this?
-        if (iseof)
-            return new Token((Tag)0);
-
-        Token *tok = new Token((Tag)peek); 
-        peek = ' ';
-        return tok;
+        Token *r;
+        if (r = words->find(std::to_string(x)))
+            return r;
+        r = new Real(x);
+        words->insert(std::to_string(x), r);
+        return r;
     }
+    if (isalpha(peek)) {
+        std::string s;
+        do {
+            s += peek; readch();
+        } while ( isalnum(peek) );
+        Token *w;
+        if (w = words->find(s))
+            return w;
+        w = new Word(s, Tag::ID);
+        words->insert(s, w);
+        return w;
+    }
+    // do i need this?
+    if (iseof)
+        return new Token((Tag)0);
+
+    Token *tok = new Token((Tag)peek); 
+    peek = ' ';
+    return tok;
+}
+
+void Lexer::printTable() {
+    words->print();
 }
 

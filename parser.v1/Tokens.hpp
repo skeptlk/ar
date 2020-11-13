@@ -9,7 +9,7 @@ public:
     Tag tag;
     Token();
     Token(Tag t);
-    std::string toString();
+    virtual std::string toString();
 };
 
 
@@ -17,14 +17,14 @@ class Num : public Token {
 public: 
     int value;
     Num(int v);
-    std::string toString();
+    virtual std::string toString();
 };
 
 class Real : public Token {
 public: 
     float value;
     Real(float v);
-    std::string toString();
+    virtual std::string toString();
 };
 
 
@@ -33,11 +33,11 @@ public:
     std::string lexeme = "";
     Word();
     Word(std::string s, Tag tag);
+    virtual std::string toString();
     static Word 
         _and, _or, _eq, _ne, _le, _ge, _asgn, 
         _minus, _true, _false, _temp;
 };
-
 
 class Type: public Word {
 public:
