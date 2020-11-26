@@ -32,7 +32,9 @@ class Word: public Token {
 public: 
     std::string lexeme = "";
     Word();
-    Word(std::string s, Tag tag);
+    Word(std::string s, Tag tag): Token(tag) {
+        lexeme = s;
+    }
     virtual std::string toString();
     static Word 
         _and, _or, _eq, _ne, _le, _ge, _asgn, 

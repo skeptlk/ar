@@ -5,9 +5,6 @@ Parser::Parser (Lexer *l) {
     move();
 }
 
-void Parser::move () {
-    look = lexer->scan();
-}
 
 void Parser::match(int t) {
     if (t == int(look->tag)) 

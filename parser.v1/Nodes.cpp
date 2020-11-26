@@ -1,4 +1,5 @@
 #include "Nodes.hpp"
+#include "Parser.hpp"
 
 std::string asciiBoxTop(int w) {
     std::string str = "┌";

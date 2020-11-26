@@ -49,9 +49,7 @@ std::string Real::toString() {
 // default constructor for map
 Word::Word(): Token((Tag)0) {};
 
-Word::Word(std::string s, Tag tag): Token(tag) {
-    lexeme = s;
-}
+
 
 std::string Word::toString() {
     return lexeme;

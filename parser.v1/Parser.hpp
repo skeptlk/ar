@@ -8,7 +8,9 @@
 class Parser {
 private: 
     Lexer * lexer;
-    void move();
+    void move() {
+        look = lexer->scan();
+    }
     void match(int t);
     Token * look;
 public: 

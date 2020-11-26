@@ -5,8 +5,6 @@
 #include "Tokens.hpp"
 
 int main() {
-    int test = 1;
-
     std::ifstream input("data.txt");
     Lexer *lex = new Lexer(&input);
     Parser *parser = new Parser(lex);
